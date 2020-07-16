@@ -1,12 +1,12 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Top from "../Top";
+import Top from "../views/Top";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/Top",
+    path: "../views/Top",
     name: "Top",
     component: Top,
   },
