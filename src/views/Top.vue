@@ -43,16 +43,16 @@
 </template>
 
 <script>
-import modal from "./components/00modal.vue";
-import mainArticles from "./components/01mainArticles.vue";
-import titleData from "./components/02title.vue";
-import mainImage from "./components/03mainImage.vue";
-import info from "./components/04textArea.vue";
-import date from "./components/05dateDecide.vue";
-import author from "./components/06authorInfo.vue";
-import category from "./components/07category.vue";
-import university from "./components/08university.vue";
-import preview from "./components/100preview.vue";
+import modal from "../components/00modal.vue";
+import mainArticles from "../components/01mainArticles.vue";
+import titleData from "../components/02title.vue";
+import mainImage from "../components/03mainImage.vue";
+import info from "../components/04textArea.vue";
+import date from "../components/05dateDecide.vue";
+import author from "../components/06authorInfo.vue";
+import category from "../components/07category.vue";
+import university from "../components/08university.vue";
+import preview from "../components/100preview.vue";
 import firebase from "firebase";
 
 export default {
@@ -136,7 +136,7 @@ export default {
       this.showModal = true;
 
       if (preview) {
-        this.mainArticle.forEach(function (item, index, array) {
+        this.mainArticle.forEach(function(item, index, array) {
           delete item.uploadedImage;
         });
         var db = firebase.firestore();
@@ -157,7 +157,7 @@ export default {
             views: 0,
             good: 0,
           })
-          .then(function (docRef) {
+          .then(function(docRef) {
             console.log("Document written with ID: ", docRef.id);
             that.message = "データを保存しました。";
             that.showModal = true;
@@ -176,7 +176,7 @@ export default {
               });
             }
           })
-          .catch(function (error) {
+          .catch(function(error) {
             console.error("Error adding document: ", error);
             that.message =
               "エラーが発生しました。お手数ですが、かわせに問い合わせてください。";
