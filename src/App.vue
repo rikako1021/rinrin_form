@@ -10,8 +10,8 @@
 <script>
 export default {
   beforeCreate() {
-    this.$router.push({ name: "top" }).catch(() => {});
-  }
+    this.$router.push({ name: "Top" }).catch(() => {});
+  },
 };
 </script>
 
