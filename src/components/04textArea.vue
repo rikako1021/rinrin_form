@@ -1,9 +1,5 @@
 <template>
-
-  <v-ons-card
-    modifier="inset"
-    class="card"
-  >
+  <v-ons-card modifier="inset" class="card">
     <textarea
       class="textarea--transparent"
       placeholder="場所など追加情報(未入力可)"
@@ -11,31 +7,25 @@
       v-model="info"
     ></textarea>
   </v-ons-card>
-
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      info: ""
+      info: "",
     };
   },
-  created () {
-  },
-  methods: {
-
-  },
+  created() {},
+  methods: {},
   watch: {
     info: {
-      handler: function () {
-        this.$emit('infoPass', this.info)
+      handler: function() {
+        this.$emit("infoPass", this.info);
       },
-    }
-  }
+    },
+  },
 };
-
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

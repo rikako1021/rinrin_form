@@ -23,7 +23,12 @@
       <!-- </v-list>  -->
       <select class="cp_sl06" required v-model="checkedCategorys">
         <option disabled value="未選択">カテゴリーを選択</option>
-        <option v-for="option in options" v-bind:value="option" v-bind:key="option">{{ option }}</option>
+        <option
+          v-for="option in options"
+          v-bind:value="option"
+          v-bind:key="option"
+          >{{ option }}</option
+        >
       </select>
       <span class="cp_sl06_highlight"></span>
       <span class="cp_sl06_selectbar"></span>
@@ -47,7 +52,7 @@ export default {
       checkedCategorys: [],
       inputCategory: "",
       options: ["インタビュー", "観光", "サークル", "生活", "グルメ", "音楽"],
-      inputSwith: false
+      inputSwith: false,
     };
   },
   created() {},
@@ -59,14 +64,14 @@ export default {
           this.inputSwith = true;
         }
         this.$emit("categoryPass", this.checkedCategorys);
-      }
+      },
     },
     inputCategory: {
       handler: function() {
         this.$emit("categoryPass", this.inputCategory);
-      }
-    }
-  }
+      },
+    },
+  },
 };
 </script>
 

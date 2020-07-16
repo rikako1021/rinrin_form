@@ -17,10 +17,9 @@ export default {
   methods: {
     modalClose() {
       this.$emit("modalClose", false);
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

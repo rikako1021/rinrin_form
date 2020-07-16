@@ -1,37 +1,37 @@
 <template>
   <v-card modifier="inset" class="card">
-    <div v-for="(item,$index) in dataArray" :key="$index">
-      <div v-if="item.type=='title'">
+    <div v-for="(item, $index) in dataArray" :key="$index">
+      <div v-if="item.type == 'title'">
         <input
           type="text"
           class="text-input"
           placeholder="章タイトル(20文字以内を推奨)"
-          style="width: 50%"
+          style="width: 50%;"
           v-model="item.contents"
         />
         <v-button @click="deleteData($index)">欄を削除</v-button>
         <hr />
       </div>
 
-      <div v-if="item.type=='detail'">
+      <div v-if="item.type == 'detail'">
         <textarea
           class="textarea--transparent"
           placeholder="詳細"
-          style="width: 50%; height: 30vh"
+          style="width: 50%; height: 30vh;"
           v-model="item.contents"
         ></textarea>
         <v-button @click="deleteData($index)">欄を削除</v-button>
         <hr />
       </div>
 
-      <div v-if="item.type=='image'">
+      <div v-if="item.type == 'image'">
         <label v-show="!item.uploadedImage" class="input-item__label">
           画像を選択
           <input
             type="file"
             accept="image/*"
             @change="onFileChange"
-            @click="clickTarget=$index"
+            @click="clickTarget = $index"
           />
         </label>
         <div class="preview-item">
@@ -40,15 +40,17 @@
             class="preview-item-file"
             :src="item.uploadedImage"
             alt
-            style="width:40%"
+            style="width: 40%;"
           />
-          <v-button v-show="item.uploadedImage" @click="remove">画像を削除</v-button>
+          <v-button v-show="item.uploadedImage" @click="remove"
+            >画像を削除</v-button
+          >
           <p class="preview-item-name">{{ item.img_name }}</p>
           <input
             type="text"
             class="text-input"
             placeholder="画像の説明"
-            style="width: 50%"
+            style="width: 50%;"
             v-model="item.imageDesc"
           />
         </div>
@@ -62,7 +64,7 @@
     <v-button modifier="small" @click="add('image')">画像を追加</v-button>
 
     <v-modal :visible="modalVisible">
-      <p style="text-align: center">
+      <p style="text-align: center;">
         読み込み中
         <br />しばらくお待ちください。
       </p>
@@ -83,7 +85,7 @@ export default {
     return {
       dataArray: [],
       clickTarget: "",
-      modalVisible: false
+      modalVisible: false,
     };
   },
   created() {
@@ -100,12 +102,12 @@ export default {
           contents: "",
           imageDesc: "",
           img_name: "",
-          uploadedImage: false
+          uploadedImage: false,
         });
       } else {
         this.dataArray.push({
           type: type,
-          contents: ""
+          contents: "",
         });
       }
     },
@@ -128,8 +130,8 @@ export default {
           "article/image/" + md5hex(JSON.stringify(new Date())) + files[0].name
         );
       /* eslint-disable */
-      storageRef.put(files[0]).then(function(snapshot) {
-        storageRef.getDownloadURL().then(function(url) {
+      storageRef.put(files[0]).then(function (snapshot) {
+        storageRef.getDownloadURL().then(function (url) {
           that.dataArray[that.clickTarget].contents = url;
         });
       });
@@ -145,7 +147,7 @@ export default {
       return new Promise((resolve, reject) => {
         let that = this;
         const reader = new FileReader();
-        reader.onload = e => {
+        reader.onload = (e) => {
           that.dataArray[that.clickTarget].uploadedImage = e.target.result;
         };
 
@@ -153,16 +155,16 @@ export default {
         resolve(reader);
       });
       /* eslint-enable */
-    }
+    },
   },
   watch: {
     dataArray: {
-      handler: function() {
+      handler: function () {
         this.$emit("dataPass", this.dataArray);
       },
-      deep: true
-    }
-  }
+      deep: true,
+    },
+  },
 };
 </script>
 

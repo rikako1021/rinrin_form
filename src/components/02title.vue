@@ -4,7 +4,7 @@
       type="text"
       class="text-input"
       placeholder="タイトル(14文字以内を推奨)"
-      style="width: 100%"
+      style="width: 100%;"
       v-model="title"
     />
   </v-card>
@@ -14,20 +14,19 @@
 export default {
   data() {
     return {
-      title: ""
+      title: "",
     };
   },
   created() {},
   methods: {},
   watch: {
     title: {
-      handler: function() {
+      handler: function () {
         this.$emit("titlePass", this.title);
-      }
-    }
-  }
+      },
+    },
+  },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

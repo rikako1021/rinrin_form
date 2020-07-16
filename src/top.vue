@@ -1,7 +1,9 @@
 <template>
   <v-page>
     <v-toolbar>
-      <v-button v-show="preview" class="left" @click="backPreview">back</v-button>
+      <v-button v-show="preview" class="left" @click="backPreview"
+        >back</v-button
+      >
       <div class="center">{{ pageTitle }}</div>
     </v-toolbar>
 
@@ -19,31 +21,38 @@
       ></author>
       <category @categoryPass="categoryGet"></category>
       <university @universityPass="universityGet"></university>
-      <div style="padding: 10px 9px">
+      <div style="padding: 10px 9px;">
         <v-button modifier="large" @click="previewOpen()">プレビュー</v-button>
       </div>
     </div>
     <div v-show="preview">
       <preview :main-article="mainArticle"></preview>
-      <div style="padding: 10px 9px">
-        <v-button modifier="large" @click="articleAdd()">記事を投稿する</v-button>
+      <div style="padding: 10px 9px;">
+        <v-button modifier="large" @click="articleAdd()"
+          >記事を投稿する</v-button
+        >
       </div>
     </div>
-    <modal @modalClose="close" v-bind:modal-visible="showModal" v-show="showModal">{{ message }}</modal>
+    <modal
+      @modalClose="close"
+      v-bind:modal-visible="showModal"
+      v-show="showModal"
+      >{{ message }}</modal
+    >
   </v-page>
 </template>
 
 <script>
-import modal from "./00modal.vue";
-import mainArticles from "./01mainArticles.vue";
-import titleData from "./02title.vue";
-import mainImage from "./03mainImage.vue";
-import info from "./04textArea.vue";
-import date from "./05dateDecide.vue";
-import author from "./06authorInfo.vue";
-import category from "./07category.vue";
-import university from "./08university.vue";
-import preview from "./100preview.vue";
+import modal from "./components/00modal.vue";
+import mainArticles from "./components/01mainArticles.vue";
+import titleData from "./components/02title.vue";
+import mainImage from "./components/03mainImage.vue";
+import info from "./components/04textArea.vue";
+import date from "./components/05dateDecide.vue";
+import author from "./components/06authorInfo.vue";
+import category from "./components/07category.vue";
+import university from "./components/08university.vue";
+import preview from "./components/100preview.vue";
 import firebase from "firebase";
 
 export default {
@@ -57,16 +66,16 @@ export default {
       authorInfo: "",
       authorIconImg: {
         name: "",
-        url: ""
+        url: "",
       },
       authorBackgroundImg: {
         name: "",
-        url: ""
+        url: "",
       },
       mainArticle: [],
       articleMainImg: {
         name: "",
-        url: ""
+        url: "",
       },
       range: "all",
       category: "未選択",
@@ -75,7 +84,7 @@ export default {
       submitActivate: true,
       showModal: false,
       preview: false,
-      finished: false
+      finished: false,
     };
   },
   components: {
@@ -88,7 +97,7 @@ export default {
     author,
     preview,
     category,
-    university
+    university,
   },
   created() {
     // const timestamp = firebase.firestore.Timestamp.now();
@@ -127,7 +136,7 @@ export default {
       this.showModal = true;
 
       if (preview) {
-        this.mainArticle.forEach(function(item, index, array) {
+        this.mainArticle.forEach(function (item, index, array) {
           delete item.uploadedImage;
         });
         var db = firebase.firestore();
@@ -146,9 +155,9 @@ export default {
             timestamp: timestamp,
             canRead: false,
             views: 0,
-            good: 0
+            good: 0,
           })
-          .then(function(docRef) {
+          .then(function (docRef) {
             console.log("Document written with ID: ", docRef.id);
             that.message = "データを保存しました。";
             that.showModal = true;
@@ -163,11 +172,11 @@ export default {
                 name: that.author,
                 info: that.authorInfo,
                 icon: that.authorIconImg,
-                backgroundImg: that.authorBackgroundImg
+                backgroundImg: that.authorBackgroundImg,
               });
             }
           })
-          .catch(function(error) {
+          .catch(function (error) {
             console.error("Error adding document: ", error);
             that.message =
               "エラーが発生しました。お手数ですが、かわせに問い合わせてください。";
@@ -217,8 +226,8 @@ export default {
         window.location.reload();
       }
       this.showModal = false;
-    }
-  } /* eslint-enable */
+    },
+  } /* eslint-enable */,
 };
 </script>
 <style scoped>

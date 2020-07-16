@@ -9,7 +9,7 @@
 export default {
   data() {
     return {
-      date: ""
+      date: "",
     };
   },
   created() {},
@@ -18,11 +18,10 @@ export default {
     date: {
       handler: function() {
         this.$emit("datePass", this.date);
-      }
-    }
-  }
+      },
+    },
+  },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

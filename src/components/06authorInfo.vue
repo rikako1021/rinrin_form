@@ -4,10 +4,11 @@
       <select class="cp_sl06" required v-model="choiseAuthor">
         <option disabled value="未選択">著者を選択</option>
         <option
-          v-for="(item,index) in authorArray"
+          v-for="(item, index) in authorArray"
           v-bind:value="item.name"
           v-bind:key="index"
-        >{{item.name}}</option>
+          >{{ item.name }}</option
+        >
       </select>
       <span class="cp_sl06_highlight"></span>
       <span class="cp_sl06_selectbar"></span>
@@ -31,20 +32,44 @@
     />
     <label v-show="choiseAuthor == '新規' && !authorIcon.name" class="label">
       アイコン画像を選択
-      <input v-show="!authorIcon.name" type="file" accept="image/*" @change="iconAdd" />
+      <input
+        v-show="!authorIcon.name"
+        type="file"
+        accept="image/*"
+        @change="iconAdd"
+      />
     </label>
     <div class="preview-item">
-      <img v-show="authorIcon.name" :src="authorIcon.url" style="width:40%" alt />
-      <v-button v-show="authorIcon.name" @click="iconDelete">画像を削除</v-button>
+      <img
+        v-show="authorIcon.name"
+        :src="authorIcon.url"
+        style="width:40%"
+        alt
+      />
+      <v-button v-show="authorIcon.name" @click="iconDelete"
+        >画像を削除</v-button
+      >
       <p class="preview-item-name"></p>
     </div>
     <label v-show="choiseAuthor == '新規' && !authorBackImg.name" class="label">
       背景画像を選択
-      <input v-show="!authorBackImg.name" type="file" accept="image/*" @change="imgAdd" />
+      <input
+        v-show="!authorBackImg.name"
+        type="file"
+        accept="image/*"
+        @change="imgAdd"
+      />
     </label>
     <div class="preview-item">
-      <img v-show="authorBackImg.name" :src="authorBackImg.url" style="width:40%" alt />
-      <v-button v-show="authorBackImg.name" @click="imgDelete">画像を削除</v-button>
+      <img
+        v-show="authorBackImg.name"
+        :src="authorBackImg.url"
+        style="width:40%"
+        alt
+      />
+      <v-button v-show="authorBackImg.name" @click="imgDelete"
+        >画像を削除</v-button
+      >
       <p class="preview-item-name"></p>
     </div>
   </v-card>
@@ -69,13 +94,13 @@ export default {
       authorArray: [],
       authorIcon: {
         name: "",
-        url: ""
+        url: "",
       },
       authorBackImg: {
         name: "",
-        url: ""
+        url: "",
       },
-      inputSwith: false
+      inputSwith: false,
     };
   },
   created() {
@@ -84,8 +109,8 @@ export default {
 
     rinrinAuthor
       .get()
-      .then(snapshot => {
-        snapshot.forEach(doc => {
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
           that.author = doc.data();
           that.author.id = doc.id;
           that.authorArray.push(that.author);
@@ -144,37 +169,37 @@ export default {
     imgDelete() {
       this.authorBackImg.name = "";
       this.authorBackImg.url = "";
-    }
+    },
   },
   watch: {
     choiseAuthor: {
       handler: function() {
         this.$emit("authorPass", this.choiseAuthor);
-      }
+      },
     },
     inputAuthor: {
       handler: function() {
         this.$emit("authorPass", this.inputAuthor);
-      }
+      },
     },
     inputInfo: {
       handler: function() {
         this.$emit("authorInfoPass", this.inputInfo);
-      }
+      },
     },
     authorIcon: {
       handler: function() {
         this.$emit("authorIconPass", this.authorIcon);
       },
-      deep: true
+      deep: true,
     },
     authorBackImg: {
       handler: function() {
         this.$emit("authorImgPass", this.authorBackImg);
       },
-      deep: true
-    }
-  }
+      deep: true,
+    },
+  },
 };
 </script>
 
