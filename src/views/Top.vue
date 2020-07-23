@@ -1,11 +1,9 @@
 <template>
-  <v-page>
-    <v-toolbar>
-      <v-button v-show="preview" class="left" @click="backPreview"
-        >back</v-button
-      >
+  <v-app>
+    <v-toolbar-items>
+      <v-btn v-show="preview" class="left" @click="backPreview">back</v-btn>
       <div class="center">{{ pageTitle }}</div>
-    </v-toolbar>
+    </v-toolbar-items>
 
     <div v-show="!preview">
       <title-data @titlePass="getTitle"></title-data>
@@ -22,28 +20,22 @@
       <category @categoryPass="categoryGet"></category>
       <university @universityPass="universityGet"></university>
       <div style="padding: 10px 9px;">
-        <v-button modifier="large" @click="previewOpen()">プレビュー</v-button>
+        <div v-show="showModal" style="color:red;">{{ message }}</div>
+        <v-btn @click="previewOpen()">プレビュー</v-btn>
       </div>
     </div>
     <div v-show="preview">
       <preview :main-article="mainArticle"></preview>
       <div style="padding: 10px 9px;">
-        <v-button modifier="large" @click="articleAdd()"
-          >記事を投稿する</v-button
-        >
+        <v-btn @click="articleAdd()">記事を投稿する</v-btn>
       </div>
     </div>
-    <modal
-      @modalClose="close"
-      v-bind:modal-visible="showModal"
-      v-show="showModal"
-      >{{ message }}</modal
-    >
-  </v-page>
+    <!-- <modal @modalClose="close" v-bind:modal-visible="showModal" v-show="showModal">{{ message }}</modal> -->
+  </v-app>
 </template>
 
 <script>
-import modal from "../components/00modal.vue";
+//import modal from "../components/00modal.vue";
 import mainArticles from "../components/01mainArticles.vue";
 import titleData from "../components/02title.vue";
 import mainImage from "../components/03mainImage.vue";
@@ -66,16 +58,16 @@ export default {
       authorInfo: "",
       authorIconImg: {
         name: "",
-        url: "",
+        url: ""
       },
       authorBackgroundImg: {
         name: "",
-        url: "",
+        url: ""
       },
       mainArticle: [],
       articleMainImg: {
         name: "",
-        url: "",
+        url: ""
       },
       range: "all",
       category: "未選択",
@@ -84,11 +76,11 @@ export default {
       submitActivate: true,
       showModal: false,
       preview: false,
-      finished: false,
+      finished: false
     };
   },
   components: {
-    modal,
+    // modal,
     mainArticles,
     titleData,
     mainImage,
@@ -97,7 +89,7 @@ export default {
     author,
     preview,
     category,
-    university,
+    university
   },
   created() {
     // const timestamp = firebase.firestore.Timestamp.now();
@@ -155,7 +147,7 @@ export default {
             timestamp: timestamp,
             canRead: false,
             views: 0,
-            good: 0,
+            good: 0
           })
           .then(function(docRef) {
             console.log("Document written with ID: ", docRef.id);
@@ -172,7 +164,7 @@ export default {
                 name: that.author,
                 info: that.authorInfo,
                 icon: that.authorIconImg,
-                backgroundImg: that.authorBackgroundImg,
+                backgroundImg: that.authorBackgroundImg
               });
             }
           })
@@ -226,8 +218,8 @@ export default {
         window.location.reload();
       }
       this.showModal = false;
-    },
-  } /* eslint-enable */,
+    }
+  } /* eslint-enable */
 };
 </script>
 <style scoped>

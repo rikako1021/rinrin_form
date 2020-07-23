@@ -1,5 +1,5 @@
 <template>
-  <v-card modifier="inset" class="card">
+  <v-card class="card">
     <label v-show="!articleMainImgSource" class="input-item__label">
       画像を選択
       <input type="file" accept="image/*" @change="onFileChange" />
@@ -12,9 +12,7 @@
         alt
         style="width:40%"
       />
-      <v-button v-show="articleMainImgSource" @click="remove"
-        >画像を削除</v-button
-      >
+      <v-btn v-show="articleMainImgSource" @click="remove">画像を削除</v-btn>
       <p class="preview-item-name">{{ articleMainImg.name }}</p>
     </div>
   </v-card>
@@ -33,9 +31,9 @@ export default {
     return {
       articleMainImg: {
         name: "",
-        url: "",
+        url: ""
       },
-      articleMainImgSource: "",
+      articleMainImgSource: ""
     };
   },
   created() {},
@@ -76,14 +74,14 @@ export default {
       return new Promise((resolve, reject) => {
         let that = this;
         const reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = e => {
           that.articleMainImgSource = e.target.result;
         }; /* eslint-enable */
 
         reader.readAsDataURL(file);
         resolve(reader);
       });
-    },
+    }
   },
   watch: {
     articleMainImg: {
@@ -91,9 +89,9 @@ export default {
         this.$emit("mainImagePass", this.articleMainImg);
         console.log("nnnnnnnnnnnnnnnn");
       },
-      deep: true,
-    },
-  },
+      deep: true
+    }
+  }
 };
 </script>
 

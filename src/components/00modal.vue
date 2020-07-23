@@ -1,10 +1,10 @@
 <template>
-  <v-alert-dialog modifier="rowfooter" :visible.sync="modalVisible">
+  <v-dialog :visible.sync="modalVisible">
     <slot></slot>
     <template slot="footer">
-      <v-alert-dialog-button @click="modalClose">Ok</v-alert-dialog-button>
+      <v-btn @click="modalClose">Ok</v-btn>
     </template>
-  </v-alert-dialog>
+  </v-dialog>
 </template>
 
 <script>
@@ -17,8 +17,8 @@ export default {
   methods: {
     modalClose() {
       this.$emit("modalClose", false);
-    },
-  },
+    }
+  }
 };
 </script>
 

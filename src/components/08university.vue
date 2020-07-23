@@ -1,14 +1,9 @@
 <template>
-  <v-card modifier="inset" class="card">
+  <v-card class="card">
     <div class="cp_ipselect">
       <select class="cp_sl06" required v-model="checkedUniversity">
         <option disabled value="未選択">大学を選択</option>
-        <option
-          v-for="option in options"
-          v-bind:value="option"
-          v-bind:key="option"
-          >{{ option }}</option
-        >
+        <option v-for="option in options" v-bind:value="option" v-bind:key="option">{{ option }}</option>
       </select>
       <span class="cp_sl06_highlight"></span>
       <span class="cp_sl06_selectbar"></span>
@@ -32,7 +27,7 @@ export default {
       checkedUniversity: [],
       inputUniversity: "",
       options: ["Shiuzuoka Univ.", "Seirei Univ.", "Tokoha Univ."],
-      inputSwith: false,
+      inputSwith: false
     };
   },
   created() {},
@@ -44,14 +39,14 @@ export default {
           this.inputSwith = true;
         }
         this.$emit("universityPass", this.checkedUniversity);
-      },
+      }
     },
     inputUniversity: {
       handler: function() {
         this.$emit("universityPass", this.inputUniversity);
-      },
-    },
-  },
+      }
+    }
+  }
 };
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <v-card modifier="inset" class="card">
+  <v-card class="card">
     公開日(入力無しの場合は投稿直後に公開されます)
     <input type="date" v-model="date" style="width: 100%" />
   </v-card>
@@ -9,7 +9,7 @@
 export default {
   data() {
     return {
-      date: "",
+      date: ""
     };
   },
   created() {},
@@ -18,9 +18,9 @@ export default {
     date: {
       handler: function() {
         this.$emit("datePass", this.date);
-      },
-    },
-  },
+      }
+    }
+  }
 };
 </script>
 

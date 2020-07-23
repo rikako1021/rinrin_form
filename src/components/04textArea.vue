@@ -1,19 +1,19 @@
 <template>
-  <v-ons-card modifier="inset" class="card">
-    <textarea
+  <v-card class="card">
+    <v-textarea
       class="textarea--transparent"
       placeholder="場所など追加情報(未入力可)"
-      style="width: 100%; height: 20vh"
+      style="width: 100%; height: 10vh"
       v-model="info"
-    ></textarea>
-  </v-ons-card>
+    ></v-textarea>
+  </v-card>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      info: "",
+      info: ""
     };
   },
   created() {},
@@ -22,9 +22,9 @@ export default {
     info: {
       handler: function() {
         this.$emit("infoPass", this.info);
-      },
-    },
-  },
+      }
+    }
+  }
 };
 </script>
 

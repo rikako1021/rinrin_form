@@ -1,5 +1,5 @@
 <template>
-  <v-card modifier="inset" class="card">
+  <v-card class="card">
     <div v-for="(item, $index) in dataArray" :key="$index">
       <div v-if="item.type == 'title'">
         <input
@@ -9,7 +9,7 @@
           style="width: 50%;"
           v-model="item.contents"
         />
-        <v-button @click="deleteData($index)">欄を削除</v-button>
+        <v-btn @click="deleteData($index)">欄を削除</v-btn>
         <hr />
       </div>
 
@@ -20,7 +20,7 @@
           style="width: 50%; height: 30vh;"
           v-model="item.contents"
         ></textarea>
-        <v-button @click="deleteData($index)">欄を削除</v-button>
+        <v-btn @click="deleteData($index)">欄を削除</v-btn>
         <hr />
       </div>
 
@@ -42,9 +42,7 @@
             alt
             style="width: 40%;"
           />
-          <v-button v-show="item.uploadedImage" @click="remove"
-            >画像を削除</v-button
-          >
+          <v-btn v-show="item.uploadedImage" @click="remove">画像を削除</v-btn>
           <p class="preview-item-name">{{ item.img_name }}</p>
           <input
             type="text"
@@ -54,21 +52,21 @@
             v-model="item.imageDesc"
           />
         </div>
-        <v-button @click="deleteData($index)">欄を削除</v-button>
+        <v-btn @click="deleteData($index)">欄を削除</v-btn>
         <hr />
       </div>
     </div>
 
-    <v-button modifier="small" @click="add('title')">タイトルを追加</v-button>
-    <v-button modifier="small" @click="add('detail')">詳細を追加</v-button>
-    <v-button modifier="small" @click="add('image')">画像を追加</v-button>
+    <v-btn @click="add('title')">タイトルを追加</v-btn>
+    <v-btn @click="add('detail')">詳細を追加</v-btn>
+    <v-btn @click="add('image')">画像を追加</v-btn>
 
-    <v-modal :visible="modalVisible">
+    <!-- <v-modal :visible="modalVisible">
       <p style="text-align: center;">
         読み込み中
         <br />しばらくお待ちください。
       </p>
-    </v-modal>
+    </v-modal>-->
   </v-card>
 </template>
 
@@ -85,7 +83,7 @@ export default {
     return {
       dataArray: [],
       clickTarget: "",
-      modalVisible: false,
+      modalVisible: false
     };
   },
   created() {
@@ -102,12 +100,12 @@ export default {
           contents: "",
           imageDesc: "",
           img_name: "",
-          uploadedImage: false,
+          uploadedImage: false
         });
       } else {
         this.dataArray.push({
           type: type,
-          contents: "",
+          contents: ""
         });
       }
     },
@@ -130,8 +128,8 @@ export default {
           "article/image/" + md5hex(JSON.stringify(new Date())) + files[0].name
         );
       /* eslint-disable */
-      storageRef.put(files[0]).then(function (snapshot) {
-        storageRef.getDownloadURL().then(function (url) {
+      storageRef.put(files[0]).then(function(snapshot) {
+        storageRef.getDownloadURL().then(function(url) {
           that.dataArray[that.clickTarget].contents = url;
         });
       });
@@ -147,7 +145,7 @@ export default {
       return new Promise((resolve, reject) => {
         let that = this;
         const reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = e => {
           that.dataArray[that.clickTarget].uploadedImage = e.target.result;
         };
 
@@ -155,16 +153,16 @@ export default {
         resolve(reader);
       });
       /* eslint-enable */
-    },
+    }
   },
   watch: {
     dataArray: {
-      handler: function () {
+      handler: function() {
         this.$emit("dataPass", this.dataArray);
       },
-      deep: true,
-    },
-  },
+      deep: true
+    }
+  }
 };
 </script>
 
